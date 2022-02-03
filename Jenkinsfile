@@ -4,7 +4,7 @@ pipeline {
   environment {
     scannerHome = 'sonar_scanner_dotnet'
     username = 'ganeshchandra'
-    appName = 'NAGPProject'
+    appName = 'nagp-devops-us'
   }
 
   options {
@@ -45,10 +45,8 @@ pipeline {
         echo "Clean Old Build"
         bat "dotnet clean"
 
-        // Buildthe project and its dependencies
         echo "Code Build"
-        bat 'dotnet build -c Release -o "ProductManagementApi/app/build"'
-        bat 'dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover -l:trx;LogFileName=ProductManagementApi.xml'
+        bat 'dotnet build -c Release -o "nagp-devops-us/app/build"'
       }
     }
 
@@ -58,6 +56,7 @@ pipeline {
       }
       steps {
         echo "Test Case Execution started"
+        bat 'dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover -l:trx;LogFileName=nagp-devops-us.xml'
       }
     }
     
@@ -85,11 +84,11 @@ pipeline {
       }
     }
 
-    // stage('Kubernetes Deployment') {
-    // steps{
-    // echo "Kubernetes Deployment step started"
-    // bat "kubectl apply -f deployment.yaml"
-    // }
-    //}
+    stage('Kubernetes Deployment') {
+      steps{
+        echo "Kubernetes Deployment step started"
+        bat "kubectl apply -f deployment.yaml"
+      }
+    }
   }
 }

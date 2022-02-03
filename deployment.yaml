@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: dotnet-app-master
-          image: ganeshchandra/test-project:i-ganeshchandra-master-latest
+          image: ganeshchandra/nagp-devops-us:i-ganeshchandra-master-latest
           ports:
             - name: http
               containerPort: 80
@@ -27,7 +27,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: dotnet-app-master
-  namespace: kubernetes-cluster-rganeshchandra
+  namespace: kubernetes-cluster-ganeshchandra
 spec:
   type: NodePort
   selector: 
